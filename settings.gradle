@@ -1,0 +1,24 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "MovieApp"
+include ':app'
+include ':core'
+include ':data'
+
+enableFeaturePreview("VERSION_CATALOGS")
+include ':remote'
+include ':features:home'
+include ':presentation'
+include ':features:detail'

@@ -1,0 +1,50 @@
+{
+  "kind": "youtube#channelListResponse",
+  "etag": "pnE_71ff8UWMaGW-W5sk3vY_dxY",
+  "pageInfo": {
+    "totalResults": 1,
+    "resultsPerPage": 5
+  },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "FoV_3i3y2ZfiOkVgcuyahxF57hA",
+      "id": "UCMUnInmOkrWN4gof9KlhNmQ",
+      "snippet": {
+        "title": "老高與小茉 Mr & Mrs Gao",
+        "description": "大家好！這裡是【老高與小茉 Mr & Mrs Gao】頻道。\n在這個頻道里我們會定期更新有趣的影片，希望大家能夠喜歡。\n不要忘記訂閱我們哦！\n一會兒影片里見咯！",
+        "customUrl": "@laogao",
+        "publishedAt": "2014-11-18T04:25:23Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/U6n1tM-bMbzyjnW3kIrs3Xdhcyxwri__7Ftm_lYuYBvPB1BRU-Z93Zvefc8TPzMUgJly4BKk=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/U6n1tM-bMbzyjnW3kIrs3Xdhcyxwri__7Ftm_lYuYBvPB1BRU-Z93Zvefc8TPzMUgJly4BKk=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/U6n1tM-bMbzyjnW3kIrs3Xdhcyxwri__7Ftm_lYuYBvPB1BRU-Z93Zvefc8TPzMUgJly4BKk=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "defaultLanguage": "zh-CN",
+        "localized": {
+          "title": "老高與小茉 Mr & Mrs Gao",
+          "description": "大家好！這裡是【老高與小茉 Mr & Mrs Gao】頻道。\n在這個頻道里我們會定期更新有趣的影片，希望大家能夠喜歡。\n不要忘記訂閱我們哦！\n一會兒影片里見咯！"
+        },
+        "country": "SG"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "uploads": "UUMUnInmOkrWN4gof9KlhNmQ"
+        }
+      }
+    }
+  ]
+}
