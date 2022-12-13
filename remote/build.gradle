@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation project(":data")
+    implementation project(path: ':core')
 
     implementation libs.bundles.androidx
     implementation libs.material
@@ -54,8 +55,8 @@ dependencies {
     implementation libs.bundles.retrofit
 
     implementation libs.hilt.android
-    kapt libs.hilt.compiler
 
+    kapt libs.hilt.compiler
     testImplementation libs.junit
     testImplementation libs.mockk
     testImplementation libs.coroutines.test

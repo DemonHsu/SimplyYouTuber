@@ -10,11 +10,13 @@ import com.example.movieapp.detail.databinding.ActivityPlayerBinding
 import com.example.movieapp.presentation.common.PlayerHelper
 import com.google.android.youtube.player.*
 import com.google.android.youtube.player.YouTubePlayer.Provider;
+import com.example.movieapp.core.common.Secrets
 
 open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
     private lateinit var binding: ActivityPlayerBinding
     private var mAutoRotation = false
     var player: YouTubePlayer? = null
+    var key = Secrets().getQBjQeGcZ("com.example.movieapp")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +25,7 @@ open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedLi
         setContentView(view)
 
         // Initializing video player with developer key
-        binding.youtubeView.initialize("AIzaSyCOUruZsAbuxAiUTxZdRMq8-y7XG0Gj_K4", this)
+        binding.youtubeView.initialize(key, this)
 
         mAutoRotation = Settings.System.getInt(
             contentResolver,
@@ -77,7 +79,7 @@ open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedLi
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         if (requestCode == RECOVERY_REQUEST) {
             // Retry initialization if user performed a recovery action
-            youTubePlayerProvider.initialize("AIzaSyCOUruZsAbuxAiUTxZdRMq8-y7XG0Gj_K4", this)
+            youTubePlayerProvider.initialize(key, this)
         }
     }
 

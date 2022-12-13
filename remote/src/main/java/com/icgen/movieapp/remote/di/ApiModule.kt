@@ -44,11 +44,9 @@ open class ApiModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
-        val key = BuildConfig.API_KEY
 
         return OkHttpClient.Builder()
             .addInterceptor(provideLoggingInterceptor(BuildConfig.DEBUG))
-            .addInterceptor(ApiKeyInterceptor(key))
             .addNetworkInterceptor(CacheInterceptor())
             .cache(provideCache(context))
             .build()

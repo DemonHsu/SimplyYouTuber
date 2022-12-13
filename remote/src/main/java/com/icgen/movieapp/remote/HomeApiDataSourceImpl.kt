@@ -1,5 +1,6 @@
 package com.icgen.movieapp.remote
 
+import com.example.movieapp.core.common.Secrets
 import com.icgen.movieapp.data.model.MoviesData
 import com.icgen.movieapp.data.source.home.HomeApiDataSource
 import com.icgen.movieapp.remote.mapper.toDataModel
@@ -13,7 +14,7 @@ class HomeApiDataSourceImpl @Inject constructor(
     val channelId = "UC0C-w0YjGpqDXGB8IHb662A" //"UCn7dB9UMTBDjKtEKBy_XISw"//
     var playlistId = ""
     var ownerPosterPath = ""
-    val key = "AIzaSyCOUruZsAbuxAiUTxZdRMq8-y7XG0Gj_K4"
+    val key = Secrets().getQBjQeGcZ("com.example.movieapp")
 
     override suspend fun getVideos(): MoviesData {
         val channels = service.getChannels("snippet,contentDetails", channelId, key)
