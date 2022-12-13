@@ -47,10 +47,11 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.start(args.movieId)
-        observeViewState()
+       // viewModel.start(args.movieId)
+       // observeViewState()
     }
 
+    /*
     private fun observeViewState() {
         lifecycleScope.launchWhenResumed {
             viewModel.viewState?.collect { viewState ->
@@ -201,4 +202,5 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>() {
         }
         super.onDestroyView()
     }
+     */
 }

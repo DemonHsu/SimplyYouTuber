@@ -56,6 +56,9 @@ dependencies {
     implementation libs.bundles.coroutines
 
     implementation libs.glide
+
+    implementation libs.avatarview
+
     kapt libs.glideCompiler
 
     implementation libs.hilt.android

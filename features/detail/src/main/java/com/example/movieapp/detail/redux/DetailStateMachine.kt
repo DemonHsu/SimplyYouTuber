@@ -23,10 +23,7 @@ class DetailStateMachine @Inject constructor(
             is GetMovieInfo -> GetMovieInfoStarted
             is GetMovieInfoError -> MovieInfoError(action.message)
             is GetMovieInfoLoaded -> MovieInfoLoaded(
-                action.detail,
-                action.cast,
-                action.videos,
-                action.similarMovies
+                action.detail
             )
         }
     }

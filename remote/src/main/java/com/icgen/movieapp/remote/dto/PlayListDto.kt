@@ -48,14 +48,25 @@ data class ChannelsItemDto(
     val contentDetails:ContentDetailsDto
 )
 
-data class VideosDto(
-    val nextPageToken: String,
+data class VideoItemDto(
+    val id: String,
+    val snippet: SnippetDto,
+    val contentDetails:ContentDetailsDto
+)
+
+data class PlayListDto(
+    val nextPageToken: String?,
     val items: List<ItemDto>
 )
 
 data class ChannelsDto(
     val items: List<ChannelsItemDto>
 )
+
+data class VideoDto(
+    val items: List<VideoItemDto>
+)
+
 
 
 

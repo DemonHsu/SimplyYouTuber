@@ -1,15 +1,12 @@
 package com.example.movieapp.home.ui
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
@@ -23,7 +20,6 @@ import com.example.movieapp.home.redux.HomeState.HomeCatalogsNextPageLoaded
 import com.example.movieapp.home.redux.HomeState.Idle
 import com.example.movieapp.home.redux.HomeViewModel
 import com.example.movieapp.presentation.base.BaseFragment
-import com.example.movieapp.presentation.common.NavigationHelper.DETAIL_DEEP_LINK
 import com.example.movieapp.presentation.common.PlayerHelper
 import com.example.movieapp.presentation.common.UiHelper.hideViews
 import com.example.movieapp.presentation.common.UiHelper.showViews
@@ -68,7 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun showLoading() {
         binding.apply {
-            hideViews(homeContent, errorContent)
+            hideViews(errorContent)
             showViews(homeProgress)
         }
     }
@@ -128,7 +124,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 if ((list.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition() == (moviesAdapter.itemCount - 1)) {
-                        Log.i("Demon", "last")
                         viewModel.nextPage()
                 }
             }
@@ -137,13 +132,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         moviesAdapter.submitList(movies)
     }
 
-    private fun onMovieClicked(id: String) {
-        //val destination = Uri.parse("$DETAIL_DEEP_LINK$id")
-        //findNavController().navigate(destination)
-
-        val key = id
+    private fun onMovieClicked(movie: MovieUI) {
         val intent = Intent(requireActivity(), PlayerActivity::class.java)
-        intent.putExtra(PlayerHelper.VIDEO_KEY, key)
+        intent.putExtra(PlayerHelper.VIDEO_KEY, movie)
         startActivity(intent)
     }
 

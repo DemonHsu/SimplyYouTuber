@@ -1,16 +1,24 @@
 package com.example.movieapp.detail.ui
 
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.view.WindowManager;
-import android.widget.Toast;
+import android.content.Intent
+import android.content.res.Configuration
+import android.os.Build
+import android.os.Bundle
+import android.provider.Settings
+import android.text.method.ScrollingMovementMethod
+import android.view.WindowManager
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import com.example.movieapp.core.common.ISODate
+import com.example.movieapp.core.common.Secrets
 import com.example.movieapp.detail.databinding.ActivityPlayerBinding
 import com.example.movieapp.presentation.common.PlayerHelper
+import com.example.movieapp.presentation.model.MovieUI
 import com.google.android.youtube.player.*
-import com.google.android.youtube.player.YouTubePlayer.Provider;
-import com.example.movieapp.core.common.Secrets
+import com.google.android.youtube.player.YouTubePlayer.Provider
+import io.getstream.avatarview.coil.loadImage
+import java.time.format.DateTimeFormatter
+
 
 open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
     private lateinit var binding: ActivityPlayerBinding
@@ -18,14 +26,31 @@ open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedLi
     var player: YouTubePlayer? = null
     var key = Secrets().getQBjQeGcZ("com.example.movieapp")
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayerBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
+
         // Initializing video player with developer key
         binding.youtubeView.initialize(key, this)
+
+        val extras = intent.extras
+        if (extras != null) {
+            extras.getParcelable<MovieUI>(PlayerHelper.VIDEO_KEY)?.let { movie ->
+                binding.itemMovieTitle.text = movie.videoTitle
+                binding.itemOwnerTitle.text = movie.ownerTitle
+                binding.itemMovieOwnerIcon.loadImage(movie.ownerPosterPath)
+                binding.itemOverview.movementMethod = ScrollingMovementMethod()
+                binding.itemOverview.text = movie.overview
+
+                ISODate.getDate(movie.uploadDate)?.let {
+                    binding.itemUpdateTime.text = it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
+                }
+            }
+        }
 
         mAutoRotation = Settings.System.getInt(
             contentResolver,
@@ -59,11 +84,10 @@ open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedLi
         if (!wasRestored) {
             val extras = intent.extras
             if (extras != null) {
-                extras.getString(PlayerHelper.VIDEO_KEY)?.let {
-                   player.loadVideo(it)
+                extras.getParcelable<MovieUI>(PlayerHelper.VIDEO_KEY)?.let {
+                   player.loadVideo(it.id)
                 }
             }
-
         }
     }
 
@@ -95,12 +119,21 @@ open class PlayerActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedLi
         )
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         player?.release()
         player = null
     }
 
+    override fun onPause() {
+        super.onPause()
+        player?.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        player?.play()
+    }
 
     companion object {
         private const val RECOVERY_REQUEST = 1

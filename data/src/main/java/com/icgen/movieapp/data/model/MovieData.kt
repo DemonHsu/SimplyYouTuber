@@ -7,10 +7,11 @@ data class MovieData(
     val ownerTitle: String,
     val ownerPosterPath: String,
     val uploadDate: String,
+    var overview: String = "",
 )
 
 
 data class MoviesData(
-    val nextPageToken: String,
+    val nextPageToken: String?,
     val list: List<MovieData>
 )

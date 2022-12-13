@@ -7,7 +7,6 @@ import com.example.movieapp.core.usecase.detail.GetMovieInfoUseCase
 import com.example.movieapp.detail.redux.DetailAction.GetMovieInfo
 import com.example.movieapp.detail.redux.DetailAction.GetMovieInfoError
 import com.example.movieapp.detail.redux.DetailAction.GetMovieInfoLoaded
-import com.example.movieapp.presentation.common.ListHelper.sliceOrGet
 import com.example.movieapp.presentation.mapper.toPresentationModel
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -30,7 +29,7 @@ class DetailMiddleware @Inject constructor(
     }
 
     private suspend fun getMovieInfoSideEffect(
-        movieId: Int,
+        movieId: String,
         store: Store<DetailState, DetailAction>
     ) {
         getMovieInfoUseCase(movieId).fold(
@@ -46,21 +45,10 @@ class DetailMiddleware @Inject constructor(
         withContext(dispatcher.default) {
             output.apply {
                 val detail = detail.toPresentationModel()
-                val videos = videos.map { it.toPresentationModel() }
-
-                val cast = cast.map { it.toPresentationModel() }
-                    .sliceOrGet(9)
-
-                val similarMovies = similarMovies
-                    .map { it.toPresentationModel() }
-                    .sliceOrGet(4)
 
                 store.dispatch(
                     GetMovieInfoLoaded(
-                        detail = detail,
-                        cast = cast,
-                        videos = videos,
-                        similarMovies = similarMovies
+                        detail = detail
                     )
                 )
             }

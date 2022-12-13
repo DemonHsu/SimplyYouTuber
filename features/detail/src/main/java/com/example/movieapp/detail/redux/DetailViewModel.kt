@@ -11,7 +11,7 @@ class DetailViewModel @Inject constructor(
     stateMachine: DetailStateMachine
 ) : ReduxViewModel<DetailState, DetailAction>(stateMachine) {
 
-    fun start(movieId: Int) {
+    fun start(movieId: String) {
         viewModelScope.launch {
             process(DetailAction.GetMovieInfo(movieId))
         }
