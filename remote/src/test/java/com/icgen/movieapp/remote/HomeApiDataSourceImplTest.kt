@@ -19,13 +19,13 @@ class HomeApiDataSourceImplTest {
     fun `should call service getVideos() once when getVideos() is called`() {
         return runTest {
             // Arrange
-            coEvery { service.getVideos("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "AIzaSyCOUruZsAbuxAiUTxZdRMq8-y7XG0Gj_K4", 20 )  } returns makeVideosDto()
+            coEvery { service.getVideos("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "test", 20 )  } returns makeVideosDto()
 
             // Act
             homeApiDataSourceImpl.getVideos()
 
             // Assert
-            coVerify(exactly = 1) { service.getVideos("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "AIzaSyCOUruZsAbuxAiUTxZdRMq8-y7XG0Gj_K4", 20 ) }
+            coVerify(exactly = 1) { service.getVideos("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "test", 20 ) }
         }
     }
 
