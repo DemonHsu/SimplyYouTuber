@@ -52,7 +52,7 @@ class HomeMiddlewareTest {
             // Arrange
             val state = HomeState.GetHomeCatalogsStarted
             val action = HomeAction.GetHomeCatalogs
-            val output = Output(emptyList(), emptyList(), emptyList(), emptyList())
+            val output = Output(emptyList())
             coEvery { getHomeCatalogsUseCase() } returns Result.success(output)
 
             // Act
@@ -62,9 +62,6 @@ class HomeMiddlewareTest {
             coVerify(exactly = 1) {
                 store.dispatch(
                     GetHomeCatalogsLoaded(
-                        emptyList(),
-                        emptyList(),
-                        emptyList(),
                         emptyList()
                     )
                 )

@@ -57,7 +57,6 @@ dependencies {
     implementation libs.okhttp
 
     implementation libs.glide
-    implementation project(path: ':features:detail')
     kapt libs.glideCompiler
 
     implementation libs.hilt.android
@@ -80,4 +79,6 @@ dependencies {
 
     androidTestImplementation libs.hilt.androidTest
     kaptAndroidTest libs.hilt.compiler
+
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }

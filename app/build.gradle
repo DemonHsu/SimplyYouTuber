@@ -42,7 +42,6 @@ dependencies {
     implementation project(':remote')
     implementation project(':presentation')
     implementation project(':features:home')
-    implementation project(':features:detail')
 
     implementation libs.bundles.androidx
     implementation libs.fragmentKtx

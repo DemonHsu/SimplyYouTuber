@@ -50,7 +50,7 @@ class HomeStateMachineTest {
         runTest {
             // Arrange
             val expected = HomeState.HomeCatalogsLoaded(
-                emptyList(), emptyList(), emptyList(), emptyList()
+                emptyList()
             )
             val job = launch(UnconfinedTestDispatcher()) {
                 stateMachine.getViewState()?.toList(testObserver)
@@ -59,7 +59,7 @@ class HomeStateMachineTest {
             // Act
             stateMachine.dispatch(
                 GetHomeCatalogsLoaded(
-                    emptyList(), emptyList(), emptyList(), emptyList()
+                    emptyList()
                 )
             )
 
