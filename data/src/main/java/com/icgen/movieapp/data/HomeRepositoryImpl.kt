@@ -12,19 +12,29 @@ class HomeRepositoryImpl @Inject constructor(
 
     private val list =  mutableListOf<Movie>()
     private var pageToken = ""
+    private var currentToken = ""
 
     override suspend fun getVideos(): List<Movie> {
 
         if (pageToken.isEmpty()){
             val result = remoteSource.getVideos()
-            pageToken = result.nextPageToken
+            result.nextPageToken?.let {
+              pageToken = it
+            }
             result.list.map { movieData -> list.add(movieData.toCoreModel()) }
         }else{
-            val result = remoteSource.getVideos(pageToken)
-            pageToken = result.nextPageToken
-            result.list.map { movieData -> list.add(movieData.toCoreModel()) }
-        }
 
+            if( currentToken != pageToken ){
+                currentToken = pageToken
+                val result = remoteSource.getVideos(pageToken)
+
+                result.nextPageToken?.let {
+                    pageToken = it
+                }
+
+                result.list.map { movieData -> list.add(movieData.toCoreModel()) }
+            }
+        }
         return list
     }
 }

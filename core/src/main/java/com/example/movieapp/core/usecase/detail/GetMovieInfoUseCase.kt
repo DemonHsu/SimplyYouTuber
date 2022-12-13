@@ -14,28 +14,21 @@ import javax.inject.Inject
 class GetMovieInfoUseCase @Inject constructor(
     private val repository: DetailRepository,
     private val dispatcher: Dispatcher
-) : BaseSuspendableUseCase<Int, GetMovieInfoUseCase.Output>() {
+) : BaseSuspendableUseCase<String, GetMovieInfoUseCase.Output>() {
 
-    override suspend fun execute(input: Int?): Output = coroutineScope {
+    override suspend fun execute(input: String?): Output = coroutineScope {
         requireNotNull(input)
 
         val detail = async() {
             repository.getMovieDetail(input)
         }
 
-
         Output(
             detail.await(),
-            listOf(),
-            listOf(),
-            listOf()
         )
     }
 
     data class Output(
         val detail: Detail,
-        val cast: List<Cast>,
-        val videos: List<Video>,
-        val similarMovies: List<Movie>
     )
 }

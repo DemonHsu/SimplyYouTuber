@@ -12,10 +12,10 @@ import com.example.movieapp.presentation.model.VideoUI
 import com.icgen.movieapp.core.model.Movie
 
 fun Movie.toPresentationModel() =
-    MovieUI(id, videoTitle, posterPath, ownerTitle, ownerPosterPath, uploadDate)
+    MovieUI(id, videoTitle, posterPath, ownerTitle, ownerPosterPath, uploadDate, overview)
 
 fun MovieUI.toCoreModel() =
-    Movie(id, videoTitle, posterPath, ownerTitle, ownerPosterPath, uploadDate)
+    Movie(id, videoTitle, posterPath, ownerTitle, ownerPosterPath, uploadDate, overview)
 
 fun Genre.toPresentationModel() =
     GenreUI(id, name)
@@ -31,12 +31,5 @@ fun Detail.toPresentationModel() =
         id,
         title,
         overview,
-        genres.map { it.toPresentationModel() },
-        posterPath,
-        popularity,
-        voteAverage,
-        voteCount,
-        status,
-        runtime,
         releaseDate
     )

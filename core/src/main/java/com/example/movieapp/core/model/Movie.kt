@@ -7,4 +7,5 @@ data class Movie(
     val ownerTitle: String,
     val ownerPosterPath: String,
     val uploadDate: String,
+    val overview: String,
 )

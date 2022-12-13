@@ -10,7 +10,7 @@ class DetailRepositoryImpl @Inject constructor(
     private val apiDataSource: DetailApiDataSource
 ) : DetailRepository {
 
-    override suspend fun getMovieDetail(id: Int): Detail {
+    override suspend fun getMovieDetail(id: String): Detail {
         return apiDataSource.getMovieDetail(id)
             .toCoreModel()
     }

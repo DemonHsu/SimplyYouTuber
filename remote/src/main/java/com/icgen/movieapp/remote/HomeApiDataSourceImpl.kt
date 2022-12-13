@@ -1,5 +1,6 @@
 package com.icgen.movieapp.remote
 
+import android.util.Log
 import com.example.movieapp.core.common.Secrets
 import com.icgen.movieapp.data.model.MoviesData
 import com.icgen.movieapp.data.source.home.HomeApiDataSource
@@ -11,21 +12,34 @@ class HomeApiDataSourceImpl @Inject constructor(
     private val service: ApiService
 ) : HomeApiDataSource {
 
-    val channelId = "UC0C-w0YjGpqDXGB8IHb662A" //"UCn7dB9UMTBDjKtEKBy_XISw"//
-    var playlistId = ""
-    var ownerPosterPath = ""
-    val key = Secrets().getQBjQeGcZ("com.example.movieapp")
+    private val channelId = "UC0C-w0YjGpqDXGB8IHb662A" //"UCn7dB9UMTBDjKtEKBy_XISw"//
+    private var playlistId = ""
+    private var ownerPosterPath = ""
+    private val key = Secrets().getQBjQeGcZ("com.example.movieapp")
 
     override suspend fun getVideos(): MoviesData {
         val channels = service.getChannels("snippet,contentDetails", channelId, key)
         playlistId = channels.items[0].contentDetails.relatedPlaylists.uploads
         ownerPosterPath = channels.items[0].snippet.thumbnails.high.url
-        val videos = service.getVideos("snippet,contentDetails,status", playlistId, key, 20)
-        return videos.toDataModel(ownerPosterPath)
+        val videos = service.getPlaylist("snippet,contentDetails,status", playlistId, key, 20)
+
+        val dataModels = videos.toDataModel(ownerPosterPath)
+
+        dataModels.list.map {
+            it.overview = service.getVideo(part = "snippet", id = it.id, key = key).items[0].snippet.description
+        }
+
+        return dataModels
     }
 
     override suspend fun getVideos(pageToken:String): MoviesData {
-        val result = service.getVideos("snippet,contentDetails,status", playlistId, key, 30 , pageToken)
-        return result.toDataModel(ownerPosterPath)
+        val result = service.getPlaylist("snippet,contentDetails,status", playlistId, key, 30 , pageToken)
+        val dataModels = result.toDataModel(ownerPosterPath)
+
+        dataModels.list.map {
+            it.overview = service.getVideo(part = "snippet", id = it.id, key = key).items[0].snippet.description
+        }
+
+        return dataModels
     }
 }

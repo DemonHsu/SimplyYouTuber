@@ -4,6 +4,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'org.jmailen.kotlinter'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {

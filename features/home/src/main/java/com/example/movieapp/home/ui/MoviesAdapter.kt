@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movieapp.core.common.ISODate
 import com.example.movieapp.home.R
 import com.example.movieapp.home.databinding.ItemMovieBinding
 import com.example.movieapp.presentation.common.GlideHelper.setAsyncImage
@@ -21,7 +22,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 class MoviesAdapter(
-    private val onMovieClicked: (id: String) -> Unit
+    private val onMovieClicked: (movie: MovieUI) -> Unit
 ) : ListAdapter<MovieUI, MoviesAdapter.ViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +38,7 @@ class MoviesAdapter(
         with(holder) {
             setData(currentMovie)
             itemView.setOnClickListener {
-                onMovieClicked(currentMovie.id)
+                onMovieClicked(currentMovie)
             }
         }
     }
@@ -54,7 +55,7 @@ class MoviesAdapter(
 
                 itemMovieOwnerIcon.loadImage(movie.ownerPosterPath)
 
-                getISODate(movie.uploadDate)?.let {
+                ISODate.getDate(movie.uploadDate)?.let {
                     itemUpdateTime.text = it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
                 }
 
@@ -63,12 +64,6 @@ class MoviesAdapter(
         }
 
 
-        @RequiresApi(Build.VERSION_CODES.O)
-        private fun getISODate(dateString: String?): LocalDateTime? {
-            val isoFormatter = DateTimeFormatter.ISO_INSTANT
-            val dateInstant = Instant.from(isoFormatter.parse(dateString))
-            return LocalDateTime.ofInstant(dateInstant, ZoneId.of(ZoneOffset.UTC.id))
-        }
 
     }
 

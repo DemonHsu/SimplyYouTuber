@@ -1,6 +1,6 @@
 package com.icgen.movieapp.remote
 
-import com.icgen.movieapp.remote.dto.VideosDto
+import com.icgen.movieapp.remote.dto.PlayListDto
 import com.icgen.movieapp.remote.service.ApiService
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -30,5 +30,5 @@ class HomeApiDataSourceImplTest {
     }
 
     private fun makeVideosDto() =
-        VideosDto("", emptyList())
+        PlayListDto("", emptyList())
 }

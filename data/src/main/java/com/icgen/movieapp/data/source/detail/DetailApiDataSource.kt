@@ -6,5 +6,5 @@ import com.icgen.movieapp.data.model.MovieData
 import com.icgen.movieapp.data.model.VideoData
 
 interface DetailApiDataSource {
-    suspend fun getMovieDetail(id: Int): DetailData
+    suspend fun getMovieDetail(videoId: String): DetailData
 }
