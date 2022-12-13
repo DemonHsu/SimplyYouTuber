@@ -12,7 +12,7 @@ class HomeApiDataSourceImpl @Inject constructor(
     private val service: ApiService
 ) : HomeApiDataSource {
 
-    private val channelId = "UC0C-w0YjGpqDXGB8IHb662A" //"UCn7dB9UMTBDjKtEKBy_XISw"//
+    private val channelId = "UCn7dB9UMTBDjKtEKBy_XISw" //"UC0C-w0YjGpqDXGB8IHb662A"
     private var playlistId = ""
     private var ownerPosterPath = ""
     private val key = Secrets().getQBjQeGcZ("com.example.movieapp")
