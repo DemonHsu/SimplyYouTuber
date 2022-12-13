@@ -26,16 +26,13 @@ class GetHomeCatalogsUseCaseTest {
     private val useCase = GetHomeCatalogsUseCase(repository, testDispatcher)
 
     @Test
-    fun `should call getPopularMovies(), getUpcomingMovies, getTrendingMovies & getTopRatedMovies when executed`() {
+    fun `should call getVideos when executed`() {
         return runTest(testDispatcher.io) {
             // Act
             useCase()
 
             // Assert
-            coVerify(exactly = 1) { repository.getPopularMovies() }
-            coVerify(exactly = 1) { repository.getUpcomingMovies() }
-            coVerify(exactly = 1) { repository.getTrendingMovies() }
-            coVerify(exactly = 1) { repository.getTopRatedMovies() }
+            coVerify(exactly = 1) { repository.getVideos() }
         }
     }
 
@@ -45,14 +42,12 @@ class GetHomeCatalogsUseCaseTest {
             // Arrange
             val movies = TestHelper.makeMovies(2)
 
-            coEvery { repository.getPopularMovies() } returns movies
-            coEvery { repository.getTrendingMovies() } returns movies
-            coEvery { repository.getUpcomingMovies() } returns movies
-            coEvery { repository.getTopRatedMovies() } returns movies
+            coEvery { repository.getVideos() } returns movies
+
 
             val expected = Result.success(
                 GetHomeCatalogsUseCase.Output(
-                    movies, movies, movies, movies
+                    movies,
                 )
             )
 
@@ -69,7 +64,7 @@ class GetHomeCatalogsUseCaseTest {
         return runTest(testDispatcher.io) {
             // Arrange
             val exception = SocketTimeoutException()
-            coEvery { repository.getPopularMovies() } throws exception
+            coEvery { repository.getVideos() } throws exception
             val expected = Result.failure<SocketTimeoutException>(exception)
 
             // Act

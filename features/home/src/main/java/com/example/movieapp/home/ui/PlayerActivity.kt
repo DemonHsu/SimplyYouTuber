@@ -1,4 +1,4 @@
-package com.example.movieapp.detail.ui
+package com.example.movieapp.home.ui
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.example.movieapp.core.common.ISODate
 import com.example.movieapp.core.common.Secrets
-import com.example.movieapp.detail.databinding.ActivityPlayerBinding
+import com.example.movieapp.home.databinding.ActivityPlayerBinding
 import com.example.movieapp.presentation.common.PlayerHelper
 import com.example.movieapp.presentation.model.MovieUI
 import com.google.android.youtube.player.*

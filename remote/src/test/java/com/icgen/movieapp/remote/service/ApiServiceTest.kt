@@ -1,6 +1,7 @@
 package com.icgen.movieapp.remote.service
 
 import com.google.gson.Gson
+import com.icgen.movieapp.remote.dto.PlayListDto
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
@@ -28,25 +29,22 @@ class ApiServiceTest {
         retrofit.create(ApiService::class.java)
     }
 
-    /*
+
     @Test
-    fun `should return popular movies when getPopularMovies() is called`() {
+    fun `should return popular movies when getPlaylist() is called`() {
         return runTest {
 
             // Arrange
-            val movieApiDto = makeMovieApiDto(0, "title", "poster")
+            val movieApiDto = makePlayListDto()
             val response = Gson().toJson(movieApiDto)
             enqueueSuccessResponse(response)
 
             // Act
-            val observer = apiService.getPopularMovies()
+            val observer = apiService.getPlaylist("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "test", 20)
 
             // Assert
             assertEquals(movieApiDto, observer)
-            assertEquals(1, observer.results.size)
-            assertEquals(0, observer.results[0].id)
-            assertEquals("title", observer.results[0].title)
-            assertEquals("poster", observer.results[0].posterPath)
+            assertEquals(0, observer.items.size)
         }
     }
 
@@ -57,73 +55,30 @@ class ApiServiceTest {
             enqueueErrorResponse()
 
             // Act
-            apiService.getTrendingMovies()
+            apiService.getPlaylist("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "test", 20)
         }
     }
 
     @Test
-    fun `should hit the correct endpoint when getPopularMovies() is called`() {
+    fun `should hit the correct endpoint when getPlaylist() is called`() {
         return runBlocking {
             // Arrange
             setupSuccessRequest()
 
             // Act
-            apiService.getPopularMovies()
+            apiService.getPlaylist("snippet,contentDetails,status", "UU0C-w0YjGpqDXGB8IHb662A", "test", 20)
 
             // Assert
-            assertEquals("/movie/popular", mockWebServer.takeRequest().path)
+            assertEquals("/playlistItems?part=snippet%2CcontentDetails%2Cstatus&playlistId=UU0C-w0YjGpqDXGB8IHb662A&key=test&maxResults=20", mockWebServer.takeRequest().path)
         }
     }
 
-    @Test
-    fun `should hit the correct endpoint when getTrendingMovies() is called`() {
-        return runBlocking {
-            // Arrange
-            setupSuccessRequest()
-
-            // Act
-            apiService.getTrendingMovies()
-
-            // Assert
-            assertEquals("/trending/movie/week", mockWebServer.takeRequest().path)
-        }
-    }
-
-    @Test
-    fun `should hit the correct endpoint when getUpcomingMovies() is called`() {
-        return runBlocking {
-            // Arrange
-            setupSuccessRequest()
-
-            // Act
-            apiService.getUpcomingMovies()
-
-            // Assert
-            assertEquals("/movie/upcoming", mockWebServer.takeRequest().path)
-        }
-    }
-
-    @Test
-    fun `should hit the correct endpoint when getTopRatedMovies() is called`() {
-        return runBlocking {
-            // Arrange
-            setupSuccessRequest()
-
-            // Act
-            apiService.getTopRatedMovies()
-
-            // Assert
-            assertEquals("/movie/top_rated", mockWebServer.takeRequest().path)
-        }
-    }
 
     private fun setupSuccessRequest() {
-        val movieApiDto = makeMovieApiDto(0, "title", "poster")
+        val movieApiDto = makePlayListDto()
         val response = Gson().toJson(movieApiDto)
         enqueueSuccessResponse(response)
     }
-
-     */
 
     private fun enqueueSuccessResponse(response: String) {
         mockWebServer.enqueue(
@@ -138,12 +93,6 @@ class ApiServiceTest {
         )
     }
 
-    /*
-    private fun makeMovieApiDto(id: Int, title: String, poster: String) =
-        MovieApiDto(
-            page = 0, totalPages = 0, totalResults = 0,
-            results = listOf(MovieResultDto(id, title, poster))
-        )
-
-     */
+    private fun makePlayListDto() =
+        PlayListDto("", emptyList())
 }

@@ -1,5 +1,6 @@
 package com.icgen.movieapp.data
 
+import com.icgen.movieapp.data.common.TestHelper.makeMovies
 import com.icgen.movieapp.data.source.home.HomeApiDataSource
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -15,58 +16,16 @@ class HomeRemoteRepositoryImplTest {
     private val homeRepositoryImpl = HomeRepositoryImpl(apiDataSource)
 
     @Test
-    fun `should call apiDataSource getTrendingMovies() once when getTrendingMovies() is called`() {
+    fun `should call apiDataSource getVideos() once when getVideos() is called`() {
         return runTest {
             // Arrange
-            coEvery { apiDataSource.getTrendingMovies() } returns emptyList()
+            coEvery { apiDataSource.getVideos() } returns makeMovies(3)
 
             // Act
-            homeRepositoryImpl.getTrendingMovies()
+            homeRepositoryImpl.getVideos()
 
             // Assert
-            coVerify(exactly = 1) { apiDataSource.getTrendingMovies() }
-        }
-    }
-
-    @Test
-    fun `should call apiDataSource getPopularMovies() once when getPopularMovies() is called`() {
-        return runTest {
-            // Arrange
-            coEvery { apiDataSource.getPopularMovies() } returns emptyList()
-
-            // Act
-            homeRepositoryImpl.getPopularMovies()
-
-            // Assert
-            coVerify(exactly = 1) { apiDataSource.getPopularMovies() }
-        }
-    }
-
-    @Test
-    fun `should call apiDataSource getUpcomingMovies() once when getUpcomingMovies() is called`() {
-        return runTest {
-            // Arrange
-            coEvery { apiDataSource.getUpcomingMovies() } returns emptyList()
-
-            // Act
-            homeRepositoryImpl.getUpcomingMovies()
-
-            // Assert
-            coVerify(exactly = 1) { apiDataSource.getUpcomingMovies() }
-        }
-    }
-
-    @Test
-    fun `should call apiDataSource getTopRatedMovies() once when getTopRatedMovies() is called`() {
-        return runTest {
-            // Arrange
-            coEvery { apiDataSource.getTopRatedMovies() } returns emptyList()
-
-            // Act
-            homeRepositoryImpl.getTopRatedMovies()
-
-            // Assert
-            coVerify(exactly = 1) { apiDataSource.getTopRatedMovies() }
+            coVerify(exactly = 1) { apiDataSource.getVideos() }
         }
     }
 }

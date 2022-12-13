@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
-import com.example.movieapp.detail.ui.PlayerActivity
 import com.example.movieapp.home.databinding.FragmentHomeBinding
 import com.example.movieapp.home.redux.HomeState
 import com.example.movieapp.home.redux.HomeState.GetHomeCatalogsStarted

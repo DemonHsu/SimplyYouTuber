@@ -19,7 +19,8 @@ class PresentationMapperTest {
             movieUI.posterPath,
             movieUI.ownerTitle,
             movieUI.ownerPosterPath,
-            movieUI.uploadDate
+            movieUI.uploadDate,
+            movieUI.overview
         )
 
         // Act
@@ -39,7 +40,8 @@ class PresentationMapperTest {
             movie.posterPath,
             movie.ownerTitle,
             movie.ownerPosterPath,
-            movie.uploadDate
+            movie.uploadDate,
+            movie.overview
         )
 
         // Act
@@ -57,6 +59,7 @@ class PresentationMapperTest {
             ownerTitle = UUID.randomUUID().toString(),
             ownerPosterPath = UUID.randomUUID().toString(),
             uploadDate = UUID.randomUUID().toString(),
+            overview = UUID.randomUUID().toString(),
         )
 
     private fun makeMovie() =
@@ -67,5 +70,6 @@ class PresentationMapperTest {
             ownerTitle = UUID.randomUUID().toString(),
             ownerPosterPath = UUID.randomUUID().toString(),
             uploadDate = UUID.randomUUID().toString(),
+            overview = UUID.randomUUID().toString()
         )
 }
