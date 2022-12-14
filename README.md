@@ -18,7 +18,7 @@ Simply Youtuber is a YouTube app that allows users to browse and view videos fro
 *   [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 *   [Jetpack Navigation](https://developer.android.com/guide/navigation)
 *   [Glide](https://github.com/bumptech/glide)
-*   [Android Youtube Player](https://github.com/PierfrancescoSoffritti/android-youtube-player)
+*   [Android Youtube Player](https://developers.google.com/youtube/android/player)
 *   [Mockk](https://github.com/mockk/mockk)
 *   [MockWebServer](https://github.com/square/okhttp/tree/master/mockwebserver)
 *   [Espresso](https://developer.android.com/training/testing/espresso)
