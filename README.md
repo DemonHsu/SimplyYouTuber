@@ -8,6 +8,7 @@ Simply Youtuber is a YouTube app that allows users to browse and view videos fro
 * Jetpack Navigation Component
 * Video streaming android-youtube-player
 * DI with Dagger Hilt
+* Hide secret key using NDK
 
 ## Libraries
 *   [Retrofit](https://github.com/square/retrofit)
